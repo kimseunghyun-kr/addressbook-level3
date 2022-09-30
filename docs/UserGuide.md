@@ -24,15 +24,21 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
+| Command   | Format                                   |
+| --------- | ---------------------------------------- |
+| `help`    | `help`                                   |
+| `add`     | `add n/NAME [p/PHONE_NUMBER][e/EMAIL] [a/ADDRESS][c/CLASS_NAME...]` |
+| `edit`    | `edit INDEX [n/NAME][p/PHONE_NUMBER] [e/EMAIL][a/ADDRESS] [c/CLASS_NAME...]` |
+| `delete`  | `delete INDEX`                           |
+| `find`    | `find KEYWORD [MORE_KEYWORDS...]`        |
+| `list`    | `list`                                   |
+| `tagA`    | `addc c/TAG_NAME`                      |
+| `tagD` | `deletec c/TAG_NAME`                   |
+| `assign`  | `assign INDEX... c/CLASS_NAME`           |
+| `listT`   | `listT`                                  |
+| `exit`    | `exit`                                   |
+| `tagsearch`| `tagsearch t/TAGS`                     |
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -153,6 +159,122 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### adding a tag to a user: `tagA`
+
+adds a tag to from given user
+
+Format: `tagA`
+
+### deleting a tag to a user: `tagD`
+
+deletes a tag from the given user
+
+Format: `tagD`
+
+### deleting a tag to a user: `listT`
+
+lists all the Tags present
+
+Format: `listT`
+
+### searching users with a specific tag: `tagSearch`
+
+finds users with a specific tag and enters a focus mode with users possessing such tags, enters focus mode
+
+Format: `tagSearch`
+
+## Features Available in Focus Mode
+
+The following commands are only available in **tagSearch mode.**
+
+| Command   | Format                               |
+| --------- | ------------------------------------ |
+| `list`    | `list`                               |
+| `session` | `session s/SESSION_NAME [d/DATE]`    |
+| `sessionRes`   | `sessionRes INDEX v/VALUE s/SESSION_NAME` |
+| `view`    | `view INDEX s/SESSION_NAME`          |
+| `lists`   | `lists`                              |
+| `back`    | `back`                               |
+
+### List all students with the tag: `list`
+
+<aside>
+ℹ️ Shows a list of all students in the class.
+
+</aside>
+
+Format: `list`
+
+- Note that `list` has different behavior in focus mode and outside focus mode.
+- In the focus mode, only students with the tag will be listed.
+
+### Create session: `session`
+
+<aside>
+ℹ️ Creates a new session.
+
+</aside>
+
+Format: `session s/SESSION_NAME [d/DATE]`
+
+- Creates a new session with name `SESSION_NAME` on `DATE`. If the `DATE` field is empty, the current date will be used.
+- `DATE` field should follow the format `dd-MM-yyyy`
+
+Example:
+
+- `session s/Lab1 d/11-08-2022` will create a session `Lab1` on 11  August 2022.
+
+### Grade session: `session_res`
+
+<aside>
+ℹ️ Grades the student for the session.
+
+</aside>
+
+Format: `session_res INDEX v/VALUE s/SESSION_NAME`
+
+- provides a result the student with index `INDEX` on the session `SESSION_NAME` with a result of `VALUE`.
+
+Example:
+
+- `session s/Lab1 d/06-10-2022` followed by `sessionRes 2 v/93 s/Lab1` will give the student at index 2 a result of 93 for the session `Lab1`.
+
+### View session grade of student: `view`
+
+<aside>
+ℹ️ View the result for a student on a given session.
+
+</aside>
+
+Format: `view INDEX s/SESSION_NAME`
+
+- View the grade of the student at index `INDEX` for the session `SESSION_NAME`.
+
+Example:
+
+- `session s/Lab1 d/06-10-2022` followed by `grade 2 v/93 s/Lab1` then `view 2 s/Lab1` will return 93, which is the grade of the student at index 2 for the session Lab1.
+
+### List all sessions: `lists`
+
+<aside>
+ℹ️ List the sessions that have been created for the class.
+
+</aside>
+
+Format: `lists`
+
+- List the sessions that have been created for the class.
+
+### Exit focus mode: `back`
+
+<aside>
+ℹ️ Exits focus mode on a class.
+
+</aside>
+
+Format: `back`
+
 
 ### Saving the data
 
